@@ -8,7 +8,15 @@
 	int main()
 	{
 		Console a;
-		a.application();
+		for (int i = 0; i < 1; i++)
+		{
+			a.application();
+		}
+		cout << a;
+		
+
+		
+		//delete[] a.p_arr;
 		
 
 

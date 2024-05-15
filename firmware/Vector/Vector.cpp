@@ -1,7 +1,7 @@
 #include "Vector.h"
 Vector :: ~Vector()
 {
-	delete[] p_arr;
+	//delete[] p_arr;
 }
 Vector::Vector()
 {
@@ -9,137 +9,106 @@ Vector::Vector()
 }
 Vector::Vector(int y1, int x1, int y2, int x2)
 {
-	/*this->y1_m = y1;
-	this->x1_m = x1;
-	this->y2_m = y2;
-	this->x2_m = x2;*/
-	this->p_arr = nullptr;
-	size_m = 0;
-	elem_size_m = 0;
-	step_m = 0;
+	
 	counter = 0;
 
 }
 float Vector::abs(Vector a)
-{	
+{	result = sqrt(pow(a.a1_m, 2) + pow((a.a2_m), 2));
 	return sqrt(pow(a.a1_m, 2) + pow((a.a2_m), 2));
 }
-float Vector::scalar(Vector a, Vector b)
+float Vector::scalar(Vector a)
 {
-	return (a.a1_m * b.a1_m) + (a.a2_m * b.a2_m);
+	result = (a.a1_m * a.out_a1) + (a.a2_m * a.out_a2);
+	return (a.a1_m * a.out_a1) + (a.a2_m * a.out_a2);
 }
-Vector  Vector ::vector_plus(Vector a, Vector b)
+Vector  Vector ::vector_plus(Vector a)
 {
 	Vector res(0,0,0,0);
-	// Calculating Vectors arguments
-	/*a.a1_m = (a.x2_m - a.x1_m);
-	a.a2_m = (a.y2_m - a.y1_m);
-	b.a1_m = (b.x2_m - b.x1_m);
-	b.a2_m = (b.y2_m - b.y1_m);*/
-	// Calculating Vectors sum
-	res.a1_m = a.a1_m + b.a1_m;
-	res.a2_m = a.a2_m + b.a2_m;
+	res.input_a1 = a.a1_m;
+	res.input_a2 = a.a2_m;
+	res.out_a1 = a.out_a1;
+	res.out_a2 = a.out_a2;
 
+	res.a1_m = a.a1_m + a.out_a1;
+	res.a2_m = a.a2_m + a.out_a2;
+	
 	return res;
 }
-Vector Vector::vector_minus(Vector a, Vector b)
+Vector Vector::vector_minus(Vector a)
 {
 	Vector res(0, 0, 0, 0);
-	// Calculating Vectors arguments
-	/*a.a1_m = (a.x2_m - a.x1_m);
-	a.a2_m = (a.y2_m - a.y1_m);
-	b.a1_m = (b.x2_m - b.x1_m);
-	b.a2_m = (b.y2_m - b.y1_m);*/
-	// Calculating Vectors difference
-	res.a1_m = a.a1_m - b.a1_m;
-	res.a2_m = a.a2_m - b.a2_m;
+	res.input_a1 = a.a1_m;
+	res.input_a2= a.a2_m;
+	res.out_a1 = a.out_a1;
+	res.out_a2 = a.out_a2;
+
+	res.a1_m = a.a1_m - a.out_a1;
+	res.a2_m = a.a2_m - a.out_a2;
 
 	return res;
 }
 Vector Vector::multiply_vector_on_const(Vector a,  int val)
 {
+	a.input_a1 = a.a1_m;
+	a.input_a2 = a.a2_m;
 	a.a1_m = a.a1_m * val;
 	a.a2_m = a.a2_m * val;
+	a.constant = val;
 	return a;
 }
-bool Vector::coliniar(Vector a, Vector b)
+bool Vector::coliniar(Vector a)
 {
-	/*a.a1_m = (a.x2_m - a.x1_m);
-	a.a2_m = (a.y2_m - a.y1_m);
-	b.a1_m = (b.x2_m - b.x1_m);
-	b.a2_m = (b.y2_m - b.y1_m);*/
-	if (b.a1_m == 0 || b.a2_m == 0)//Todo 
+
+	if (a.out_a1 == 0 || a.out_a2 == 0)
 	{
-		float val = b.a2_m / a.a2_m;
+		if (a.out_a1 == 0)
+		{
+			float val = a.out_a2 / a.input_a2;
+			isColiniar = ((a.input_a1 * val == a.out_a1) && (a.input_a2 * val == a.out_a2)) ? true : false;
+			return isColiniar;
+		}
+		else if (a.out_a2 == 0)
+		{
+			float val = a.out_a1 / a.input_a1;
+			isColiniar = ((a.input_a1 * val == a.out_a1) && (a.input_a2 * val == a.out_a2)) ? true : false;
+				return isColiniar;
+		}
 		
-			return ((a.a1_m * val == b.a1_m) && (a.a2_m * val == b.a2_m)) ? true : false;
+		
+			
 	}
 	else
 	{
-	return ((a.a1_m / b.a1_m) == (a.a2_m / b.a2_m)) ? true : false;
+		isColiniar = ((a.input_a1 / a.out_a1) == (a.input_a2 / a.out_a2)) ? true : false;
+	return isColiniar;
 	}
 	
+	
+	
 }
-bool Vector::ortogonal(Vector a, Vector b)
+bool Vector::ortogonal(Vector a)
 {
-	return (scalar(a, b) == 0) ? true : false;
+	;
+	isOrtogonal = (scalar(a) == 0) ? true : false;
+	return isOrtogonal;
 }
-void Vector::expandArray(int size)
-{
-	Vector* new_arr = new Vector[size];
-	step_m = size - size_m;
-	copy(p_arr, (p_arr + size_m), new_arr);
-	delete[] p_arr;
-	p_arr = new_arr;
-	size_m = size;
 
-}
-int Vector::getSize()
-{
-	return size_m;
-}
-int Vector::getElemSize()
-{
 
-	return elem_size_m;
-}
-void Vector::setValue(Vector a)
-{
-	if (p_arr == nullptr && getSize() == 0)
-	{
-		int argument = getSize() + 1;
-		expandArray(argument);
-		elem_size_m += step_m;
-		p_arr[elem_size_m - 1] = a;
-
-	}
-	else
-	{
-		int temp = getElemSize();
-		if (temp + 1 > getSize())
-		{
-			int argument = temp + 1;
-			expandArray(argument);
-			elem_size_m += step_m;
-
-			p_arr[elem_size_m - 1] = a;
-
-		}
-
-	}
-}
 ostream& operator << (ostream& out, const Vector& arr)
 {
+	
 
+	
 	out << endl;
 	out << "Vector x = " << arr.a1_m << endl;
 	out << "Vector y = " << arr.a2_m << endl;
 	cout << endl;
+	
+	
+	
+	
 
 	return out;
 
 }
-/*int Vector::counter_geter(int counter)
-{
-	return counter; 
-}*/

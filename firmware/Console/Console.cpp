@@ -2,7 +2,12 @@
 Console::Console()
 {
 	counter_m = 0;
-	
+	p_arr = nullptr;
+	size_m = 0;
+	elem_size_m = 0;
+	step_m = 0;
+	prev_counter = 0;
+	flag = 0;
 }
 void Console::application()
 {
@@ -20,6 +25,10 @@ void Console::application()
 		cin >> a.a2_m;
 		
 		cout << "Abs = " << a.abs(a) << endl;
+		prev_counter = 1;
+		a.counter = prev_counter;
+		setValue(a);
+		
 		break;
 	case 2:// scalar
 
@@ -34,13 +43,16 @@ void Console::application()
 
 		cout << "Enter vector b parameters" << endl;
 		cout << "Enter b1: ";
-		cin >> b.a1_m;
+		cin >> a.out_a1;
 		cout << "Enter b2: ";
-		cin >> b.a2_m;
+		cin >> a.out_a2;
 		
-
+		
 		cout << endl;
-		cout << "scalar = " << a.scalar(a,b) << endl;
+		cout << "scalar = " << a.scalar(a) << endl;
+		prev_counter = 2;
+		a.counter = prev_counter;
+		setValue(a);
 		break;
 	case 3:// sum
 		
@@ -49,19 +61,25 @@ void Console::application()
 		cin >> a.a1_m;
 		cout << "Enter a2: ";
 		cin >> a.a2_m;
-
+		
 
 		cout << endl;
 
 		cout << "Enter vector b parameters" << endl;
 		cout << "Enter b1: ";
-		cin >> b.a1_m;
+		cin >> a.out_a1;
 		cout << "Enter b2: ";
-		cin >> b.a2_m;
+		cin >> a.out_a2;
 
-		temp = temp.vector_plus(a, b);
-		temp.counter = 3;
-		cout << temp;
+		
+		
+		a = a.vector_plus(a);
+		prev_counter = 3;
+		a.counter = prev_counter;
+		setValue(a);
+		
+		cout << a;
+		
 		break;
 	case 4:// difference
 		cout << "Enter vector a parameters" << endl;
@@ -70,18 +88,20 @@ void Console::application()
 		cout << "Enter a2: ";
 		cin >> a.a2_m;
 
-
+		
 		cout << endl;
 
 		cout << "Enter vector b parameters" << endl;
 		cout << "Enter b1: ";
-		cin >> b.a1_m;
+		cin >> a.out_a1;
 		cout << "Enter b2: ";
-		cin >> b.a2_m;
+		cin >> a.out_a2;
 		
-		temp = temp.vector_minus(a, b);
-		temp.counter = 4;
-		cout << temp;
+		a = a.vector_minus(a);
+		prev_counter = 4;
+		a.counter = prev_counter;
+		setValue(a);
+		cout << a;
 		break;
 	case 5:// multiply on constant
 		int val;
@@ -94,50 +114,60 @@ void Console::application()
 		cout << "Enter a multiplier value: ";
 		cin >> val;
 		
-		temp = temp.multiply_vector_on_const(a, val);
-		temp.counter = 5;
-		cout << temp;
+		a = a.multiply_vector_on_const(a, val);
+		prev_counter = 5;
+		a.counter = prev_counter;
+		cout << a;
+		setValue(a);
 		
 		break;
 	case 6:// Coliniar or ortogonal
 		bool coliniar, ortogonal;
 		cout << "Enter vector a parameters" << endl;
 		cout << "Enter a1: ";
-		cin >> a.a1_m;
+		cin >> a.input_a1;
 		cout << "Enter a2: ";
-		cin >> a.a1_m;
+		cin >> a.input_a2;
 
+		
 
 		cout << endl;
 
 		cout << "Enter vector b parameters" << endl;
 		cout << "Enter b1: ";
-		cin >> b.a1_m;
+		cin >> a.out_a1;
 		cout << "Enter b2: ";
-		cin >> b.a2_m;
+		cin >> a.out_a2;
 		
-		coliniar = temp.coliniar(a,b);
-		ortogonal = temp.ortogonal(a, b);
-
+		
+		 
+		coliniar = a.coliniar(a);
+		ortogonal = a.ortogonal(a);
+		prev_counter = 6;
+		a.counter = prev_counter;
+		setValue(a);
+		//temp.setValue(b);
+		
 		if (coliniar && !ortogonal)
 		{
-			cout << "Vectors a and b are coliniar" << endl;
+			cout << "Vectors 1 and 2 are coliniar" << endl;
 		}
 		else if (!coliniar && ortogonal)
 		{
-			cout << "Vectors a and b are ortogonal" << endl;
+			cout << "Vectors 1 and 2 are ortogonal" << endl;
 		}
 		else if (coliniar && ortogonal)
 		{
-			cout << "Vectors a and b are ortogonal and coliniar" << endl;
+			cout << "Vectors 1 and 2 are ortogonal and coliniar" << endl;
 		}
 		else
 		{
-			cout << "Vectors a and b are not ortogonal and not coliniar" << endl;
+			cout << "Vectors 1 and 2 are not ortogonal and not coliniar" << endl;
 		}
 
-
 		break;
+
+	
 	default:// incorrect var
 		while (counter_m < 1 || counter_m > 6)
 		{
@@ -148,6 +178,7 @@ void Console::application()
 		}
 		break;
 	}
+	
 	cout << endl;
 }
 /*ostream& operator<< (ostream& out, const Vector& obj)
@@ -156,3 +187,172 @@ void Console::application()
 	
 		return out;
 }*/
+void Console::expandArray(int size)
+{
+	Vector* new_arr = new Vector[size];
+	step_m = size - size_m;
+	copy(p_arr, (p_arr + size_m), new_arr);
+	delete[] p_arr;
+	p_arr = new_arr;
+	size_m = size;
+
+}
+void Console::setValue(Vector a)
+{
+	if (p_arr == nullptr && size_m == 0)
+	{
+		int argument = size_m + 1;
+		expandArray(argument);
+		elem_size_m += step_m;
+		p_arr[elem_size_m - 1] = a;
+
+	}
+	else
+	{
+		int temp = getElemSize();
+		if (temp + 1 > size_m)
+		{
+			int argument = temp + 1;
+			expandArray(argument);
+			elem_size_m += step_m;
+
+			p_arr[elem_size_m - 1] = a;
+
+		}
+
+	}
+}
+int Console::getSize()
+{
+	return size_m;
+}
+int Console::getElemSize()
+{
+
+	return elem_size_m;
+}
+ ostream& operator<< (ostream& out, const Console& object)
+{
+	out << "***************************************";
+	out << endl;
+	for (int i = 0; i < object.size_m; i++)
+	{
+		
+		
+		switch (object.p_arr[i].counter)
+		{
+		case 1:
+			out << endl;
+			out << "operation # " << (i + 1) << endl;
+			out << "Operation type: module" << endl;
+			out << "Input data:" << endl;
+			out << "x = " << object.p_arr[i].a1_m << endl; 
+			out << "y = " << object.p_arr[i].a2_m << endl;
+			out << "Output data:" << endl;
+			out << "Module = " << object.p_arr[i].result << endl;
+			out << endl;
+			
+			break;
+		case 2:
+			out << endl;
+			out << "operation # " << (i + 1) << endl;
+			out << "Operation type: scalar multiply" << endl;
+			out << "Input data:" << endl;
+			out << "Vector 1:" << endl;
+			out << "x = " << object.p_arr[i].a1_m << endl;
+			out << "y = " << object.p_arr[i].a2_m << endl;
+			out << "Vector 2:" << endl;
+			out << "x = " << object.p_arr[i].out_a1 << endl;
+			out << "y = " << object.p_arr[i].out_a2 << endl;
+			out << "Output data:" << endl;
+			out << "Scalar = " << object.p_arr[i].result << endl;
+			out << endl;
+			break;
+		case 3:
+			out << endl;
+			out << "operation # " << (i + 1) << endl;
+			out << "Operation type: sum" << endl;
+			out << "Input data:" << endl;
+			out << "Vector 1:" << endl;
+			out << "x = " << object.p_arr[i].input_a1 << endl;
+			out << "y = " << object.p_arr[i].input_a2 << endl;
+			out << "Vector 2:" << endl;
+			out << "x = " << object.p_arr[i].out_a1 << endl;
+			out << "y = " << object.p_arr[i].out_a2 << endl;
+			out << "Output data:" << endl;
+			out << "Result Vector: " <<  endl;
+			out << "x = " <<  object.p_arr[i].a1_m << endl;
+			out << "y = " <<  object.p_arr[i].a2_m << endl;
+			out << endl;
+			break;
+		case 4:
+			out << endl;
+			out << "operation # " << (i + 1) << endl;
+			out << "Operation type: difference" << endl;
+			out << "Input data:" << endl;
+			out << "Vector 1:" << endl;
+			out << "x = " << object.p_arr[i].input_a1 << endl;
+			out << "y = " << object.p_arr[i].input_a2 << endl;
+			out << "Vector 2:" << endl;
+			out << "x = " << object.p_arr[i].out_a1 << endl;
+			out << "y = " << object.p_arr[i].out_a2 << endl;
+			out << "Output data:" << endl;
+			out << "Result Vector: " << endl;
+			out << "x = " << object.p_arr[i].a1_m << endl;
+			out << "y = " << object.p_arr[i].a2_m << endl;
+			out << endl;
+			break;
+		case 5:
+			out << endl;
+			out << "operation # " << (i + 1) << endl;
+			out << "Operation type: multiply on constant" << endl;
+			out << "Input data:" << endl;
+			out << "Vector:" << endl;
+			out << "x = " << object.p_arr[i].input_a1 << endl;
+			out << "y = " << object.p_arr[i].input_a2 << endl;
+			out << "Multiplication constant = " << object.p_arr[i].constant << endl;
+			out << "Output data:" << endl;
+			out << "Result Vector: " << endl;
+			out << "x = " << object.p_arr[i].a1_m << endl;
+			out << "y = " << object.p_arr[i].a2_m << endl;
+			out << endl;
+			
+			break;
+		case 6:
+			out << endl;
+			out << "operation # " << (i + 1) << endl;
+			out << "Operation type: Coliniar or ortogonal" << endl;
+			out << "Input data:" << endl;
+			out << "Vector 1:" << endl;
+			out << "x = " << object.p_arr[i].input_a1 << endl;
+			out << "y = " << object.p_arr[i].input_a2 << endl;
+			out << "Vector 2:" << endl;
+			out << "x = " << object.p_arr[i].out_a1 << endl;
+			out << "y = " << object.p_arr[i].out_a2 << endl;
+			out << "Output data:" << endl;
+			out << "Result: " << endl;
+			if (object.p_arr[i].isColiniar && !object.p_arr[i].isOrtogonal)
+			{
+				cout << "Vectors 1 and 2 are coliniar" << endl;
+			}
+			else if (!object.p_arr[i].isColiniar && object.p_arr[i].isOrtogonal)
+			{
+				cout << "Vectors 1 and 2 are ortogonal" << endl;
+			}
+			else if (object.p_arr[i].isColiniar && object.p_arr[i].isOrtogonal)
+			{
+				cout << "Vectors 1 and 2 are ortogonal and coliniar" << endl;
+			}
+			else
+			{
+				cout << "Vectors 1 and 2 are not ortogonal and not coliniar" << endl;
+			}
+			out << endl;
+		
+			break;
+		}
+	}
+	out << "***************************************" << endl;
+	return out;
+	
+}
