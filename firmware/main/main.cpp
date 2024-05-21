@@ -3,23 +3,28 @@
 #include <iostream>
 #include "Console.h"
 #include "Vector.h"
+#include "Logger.h"
 
 	using namespace std;
 	int main()
 	{
+		Logger log;
 		Console a;
-		for (int i = 0; i < 1; i++)
+		log.open("log.txt");
+		while (1)
 		{
-			a.application();
+				a.application();	
+				
+				if (a.flag_for_clear)// flag for clearing all
+				{
+					log.write(a);
+					break;
+					
+				}
 		}
-		cout << a;
-		
-
-		
-		//delete[] a.p_arr;
-		
-
-
+				
+			delete[] a.p_arr;
+			log.close();
 		
 		return main();
 	}

@@ -8,11 +8,16 @@ Console::Console()
 	step_m = 0;
 	prev_counter = 0;
 	flag = 0;
+	flag_for_clear = 0;
+}
+Console :: ~Console()
+{
+	delete[] p_arr;
 }
 void Console::application()
 {
 
-	cout << "Choose preferable method : 1 - vector abs, 2 - scalar multiply, 3 - sum of two vectors, 4 - difference of two vectors, 5 - multiply vector on constant, 6 - Check coliniar or ortogonal" << endl;
+	cout << "Choose preferable method : 1 - vector abs, 2 - scalar multiply, 3 - sum of two vectors, 4 - difference of two vectors, 5 - multiply vector on constant, 6 - Check coliniar or ortogonal, 7 - Save all information to logger file" << endl;
 	cout << ">";
 	cin >> counter_m;
 	
@@ -146,7 +151,7 @@ void Console::application()
 		prev_counter = 6;
 		a.counter = prev_counter;
 		setValue(a);
-		//temp.setValue(b);
+		
 		
 		if (coliniar && !ortogonal)
 		{
@@ -167,13 +172,18 @@ void Console::application()
 
 		break;
 
-	
+	case 7:
+
+		flag_for_clear = 1;// flag to delete arr and close logger file
+		
+		break;
 	default:// incorrect var
-		while (counter_m < 1 || counter_m > 6)
+		while (counter_m < 1 || counter_m > 7)
 		{
 			cout << endl;
 			cout << "Incorrect variant, choose again" << endl;
-			return application();
+			//return application();
+			break;
 			
 		}
 		break;
@@ -243,7 +253,7 @@ int Console::getElemSize()
 		{
 		case 1:
 			out << endl;
-			out << "operation # " << (i + 1) << endl;
+			//out << "operation # " << (i + 1) << endl;
 			out << "Operation type: module" << endl;
 			out << "Input data:" << endl;
 			out << "x = " << object.p_arr[i].a1_m << endl; 
@@ -255,7 +265,7 @@ int Console::getElemSize()
 			break;
 		case 2:
 			out << endl;
-			out << "operation # " << (i + 1) << endl;
+			//out << "operation # " << (i + 1) << endl;
 			out << "Operation type: scalar multiply" << endl;
 			out << "Input data:" << endl;
 			out << "Vector 1:" << endl;
@@ -270,7 +280,7 @@ int Console::getElemSize()
 			break;
 		case 3:
 			out << endl;
-			out << "operation # " << (i + 1) << endl;
+			//out << "operation # " << (i + 1) << endl;
 			out << "Operation type: sum" << endl;
 			out << "Input data:" << endl;
 			out << "Vector 1:" << endl;
@@ -287,7 +297,7 @@ int Console::getElemSize()
 			break;
 		case 4:
 			out << endl;
-			out << "operation # " << (i + 1) << endl;
+			//out << "operation # " << (i + 1) << endl;
 			out << "Operation type: difference" << endl;
 			out << "Input data:" << endl;
 			out << "Vector 1:" << endl;
@@ -304,7 +314,7 @@ int Console::getElemSize()
 			break;
 		case 5:
 			out << endl;
-			out << "operation # " << (i + 1) << endl;
+			//out << "operation # " << (i + 1) << endl;
 			out << "Operation type: multiply on constant" << endl;
 			out << "Input data:" << endl;
 			out << "Vector:" << endl;
@@ -320,7 +330,7 @@ int Console::getElemSize()
 			break;
 		case 6:
 			out << endl;
-			out << "operation # " << (i + 1) << endl;
+			//out << "operation # " << (i + 1) << endl;
 			out << "Operation type: Coliniar or ortogonal" << endl;
 			out << "Input data:" << endl;
 			out << "Vector 1:" << endl;
