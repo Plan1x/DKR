@@ -343,19 +343,19 @@ int Console::getElemSize()
 			out << "Result: " << endl;
 			if (object.p_arr[i].isColiniar && !object.p_arr[i].isOrtogonal)
 			{
-				cout << "Vectors 1 and 2 are coliniar" << endl;
+				out << "Vectors 1 and 2 are coliniar" << endl;
 			}
 			else if (!object.p_arr[i].isColiniar && object.p_arr[i].isOrtogonal)
 			{
-				cout << "Vectors 1 and 2 are ortogonal" << endl;
+				out << "Vectors 1 and 2 are ortogonal" << endl;
 			}
 			else if (object.p_arr[i].isColiniar && object.p_arr[i].isOrtogonal)
 			{
-				cout << "Vectors 1 and 2 are ortogonal and coliniar" << endl;
+				out << "Vectors 1 and 2 are ortogonal and coliniar" << endl;
 			}
 			else
 			{
-				cout << "Vectors 1 and 2 are not ortogonal and not coliniar" << endl;
+				out << "Vectors 1 and 2 are not ortogonal and not coliniar" << endl;
 			}
 			out << endl;
 		

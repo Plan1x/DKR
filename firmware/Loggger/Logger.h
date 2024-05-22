@@ -7,7 +7,7 @@ using namespace std;
 class Logger
 {
 public:
-	Console b;
+	//Console b;
 	ofstream file;
 	Logger();
 	void open(const string& filename);

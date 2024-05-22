@@ -13,8 +13,7 @@
 		log.open("log.txt");
 		while (1)
 		{
-				a.application();	
-				
+				a.application();			
 				if (a.flag_for_clear)// flag for clearing all
 				{
 					log.write(a);

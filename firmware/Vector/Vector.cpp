@@ -103,7 +103,7 @@ ostream& operator << (ostream& out, const Vector& arr)
 	out << endl;
 	out << "Vector x = " << arr.a1_m << endl;
 	out << "Vector y = " << arr.a2_m << endl;
-	cout << endl;
+	out << endl;
 	
 	
 	
