@@ -4,12 +4,19 @@
 #include "Console.h"
 #include "Vector.h"
 #include "Logger.h"
+#include "AES_Coding.h"
+
 
 	using namespace std;
+	
 	int main()
 	{
+		Aes b;
 		Logger log;
 		Console a;
+
+		//b.AES_init(a);
+
 		log.open("log.txt");
 		while (1)
 		{
