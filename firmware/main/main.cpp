@@ -5,34 +5,23 @@
 #include "Vector.h"
 #include "Logger.h"
 #include "AES_Coding.h"
+#include <sstream>
 
 
-	using namespace std;
-	
-	int main()
-	{
-		Aes b;
-		Logger log;
-		Console a;
+using namespace std;
 
-		
+int main()
+{
+	Aes b;
+	b.AES_init();
+	Console a(b);
 
-		log.open("log.txt");
-		while (1)
-		{
-				a.application();			
-				if (a.flag_for_clear)// flag for clearing all
-				{
-					log.write(a);
-					break;
-					
-				}
-		}
-				
-			delete[] a.p_arr;
-			log.close();
-		
-		return main();
-	}
+	a.application();
+
+
+	delete[] a.p_arr;
+
+	return main();
+}
 
 

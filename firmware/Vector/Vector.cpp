@@ -9,12 +9,13 @@ Vector::Vector()
 }
 Vector::Vector(int y1, int x1, int y2, int x2)
 {
-	
+
 	counter = 0;
 
 }
 float Vector::abs(Vector a)
-{	result = sqrt(pow(a.a1_m, 2) + pow((a.a2_m), 2));
+{
+	result = sqrt(pow(a.a1_m, 2) + pow((a.a2_m), 2));
 	return sqrt(pow(a.a1_m, 2) + pow((a.a2_m), 2));
 }
 float Vector::scalar(Vector a)
@@ -22,9 +23,9 @@ float Vector::scalar(Vector a)
 	result = (a.a1_m * a.out_a1) + (a.a2_m * a.out_a2);
 	return (a.a1_m * a.out_a1) + (a.a2_m * a.out_a2);
 }
-Vector  Vector ::vector_plus(Vector a)
+Vector  Vector::vector_plus(Vector a)
 {
-	Vector res(0,0,0,0);
+	Vector res(0, 0, 0, 0);
 	res.input_a1 = a.a1_m;
 	res.input_a2 = a.a2_m;
 	res.out_a1 = a.out_a1;
@@ -32,14 +33,14 @@ Vector  Vector ::vector_plus(Vector a)
 
 	res.a1_m = a.a1_m + a.out_a1;
 	res.a2_m = a.a2_m + a.out_a2;
-	
+
 	return res;
 }
 Vector Vector::vector_minus(Vector a)
 {
 	Vector res(0, 0, 0, 0);
 	res.input_a1 = a.a1_m;
-	res.input_a2= a.a2_m;
+	res.input_a2 = a.a2_m;
 	res.out_a1 = a.out_a1;
 	res.out_a2 = a.out_a2;
 
@@ -48,7 +49,7 @@ Vector Vector::vector_minus(Vector a)
 
 	return res;
 }
-Vector Vector::multiply_vector_on_const(Vector a,  int val)
+Vector Vector::multiply_vector_on_const(Vector a, int val)
 {
 	a.input_a1 = a.a1_m;
 	a.input_a2 = a.a2_m;
@@ -72,20 +73,20 @@ bool Vector::coliniar(Vector a)
 		{
 			float val = a.out_a1 / a.input_a1;
 			isColiniar = ((a.input_a1 * val == a.out_a1) && (a.input_a2 * val == a.out_a2)) ? true : false;
-				return isColiniar;
+			return isColiniar;
 		}
-		
-		
-			
+
+
+
 	}
 	else
 	{
 		isColiniar = ((a.input_a1 / a.out_a1) == (a.input_a2 / a.out_a2)) ? true : false;
-	return isColiniar;
+		return isColiniar;
 	}
-	
-	
-	
+
+
+
 }
 bool Vector::ortogonal(Vector a)
 {
@@ -97,17 +98,17 @@ bool Vector::ortogonal(Vector a)
 
 ostream& operator << (ostream& out, const Vector& arr)
 {
-	
 
-	
+
+
 	out << endl;
 	out << "Vector x = " << arr.a1_m << endl;
 	out << "Vector y = " << arr.a2_m << endl;
 	out << endl;
-	
-	
-	
-	
+
+
+
+
 
 	return out;
 

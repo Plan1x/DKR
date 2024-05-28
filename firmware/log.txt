@@ -1,0 +1,115 @@
+***************************************
+Operation type: scalar multiply
+Input data:
+Vector 1:
+x = 4
+y = 5
+Vector 2:
+x = 2
+y = 5
+Output data:
+Scalar = 33
+***************************************
+***************************************
+Operation type: scalar multiply
+Input data:
+Vector 1:
+x = 35
+y = 23
+Vector 2:
+x = 5
+y = 2
+Output data:
+Scalar = 221
+***************************************
+***************************************
+Operation type: module
+Input data:
+x = 4
+y = 3
+Output data:
+Module = 5
+***************************************
+***************************************
+Operation type: difference
+Input data:
+Vector 1:
+x = 4
+y = 2
+Vector 2:
+x = 5
+y = 2
+Output data:
+Result Vector: 
+x = -1
+y = 0
+***************************************
+***************************************
+Operation type: module
+Input data:
+x = 3
+y = 4
+Output data:
+Module = 5
+***************************************
+***************************************
+Operation type: scalar multiply
+Input data:
+Vector 1:
+x = 5
+y = 23
+Vector 2:
+x = 5
+y = 3
+Output data:
+Scalar = 94
+***************************************
+***************************************
+Operation type: Coliniar or ortogonal
+Input data:
+Vector 1:
+x = 3
+y = 4
+Vector 2:
+x = 2
+y = 1
+Output data:
+Result: 
+Vectors 1 and 2 are ortogonal
+***************************************
+***************************************
+Operation type: module
+Input data:
+x = 3
+y = 2
+Output data:
+Module = 3.60555
+***************************************
+***************************************
+Operation type: module
+Input data:
+x = 2
+y = 3
+Output data:
+Module = 3.60555
+***************************************
+***************************************
+Operation type: module
+Input data:
+x = 2
+y = 4
+Output data:
+Module = 4.47214
+***************************************
+***************************************
+Operation type: scalar multiply
+Input data:
+Vector 1:
+x = 444
+y = 0
+Vector 2:
+x = 10
+y = 0
+Output data:
+Scalar = 4440
+***************************************

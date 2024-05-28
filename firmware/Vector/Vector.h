@@ -5,7 +5,7 @@ using namespace std;
 class Vector
 {
 public:
-	
+
 	/////////Operational variables
 	float a1_m, a2_m;
 	int counter;
@@ -25,8 +25,8 @@ public:
 	Vector multiply_vector_on_const(Vector a, int val);
 	bool coliniar(Vector a);
 	bool ortogonal(Vector a);
-    friend ostream& operator<< (ostream& out, const Vector& arr);
+	friend ostream& operator<< (ostream& out, const Vector& arr);
 
 private:
-	
+
 };
