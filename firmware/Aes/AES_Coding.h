@@ -16,11 +16,12 @@ public:
 
 string out;
 string cipher_text, decoded_text;
-ostringstream oss;
 byte key[CryptoPP::AES::DEFAULT_KEYLENGTH];
 byte iv[CryptoPP::AES::BLOCKSIZE];
 void aes_encrypt(const std::string& plaintext, std::string& ciphertext, const byte key[AES::DEFAULT_KEYLENGTH], const byte iv[AES::BLOCKSIZE]);
 void aes_decrypt(const std::string& ciphertext, std::string& decryptedtext, const byte key[AES::DEFAULT_KEYLENGTH], const byte iv[AES::BLOCKSIZE]);
 void AES_init(const Console& console);
 Aes();
+private:
+ostringstream oss;
 };

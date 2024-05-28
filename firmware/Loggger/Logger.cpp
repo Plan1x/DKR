@@ -16,6 +16,7 @@ void Logger::write(const Console& console)
 	a.AES_init(console);
 	a.aes_encrypt(a.out, a.cipher_text, a.key, a.iv);
 	file << "Encrypted text:" << endl;
+	file << endl;
 	file << a.cipher_text << endl;
 	file << endl;
 	file << "Key: ";

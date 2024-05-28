@@ -15,7 +15,7 @@
 		Logger log;
 		Console a;
 
-		//b.AES_init(a);
+		
 
 		log.open("log.txt");
 		while (1)

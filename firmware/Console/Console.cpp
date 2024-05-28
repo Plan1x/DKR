@@ -191,12 +191,7 @@ void Console::application()
 	
 	cout << endl;
 }
-/*ostream& operator<< (ostream& out, const Vector& obj)
-{
-		
-	
-		return out;
-}*/
+
 void Console::expandArray(int size)
 {
 	Vector* new_arr = new Vector[size];
